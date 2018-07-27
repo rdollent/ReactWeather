@@ -26692,9 +26692,18 @@
 
 	var About = function About(props) {
 	    return React.createElement(
-	        "h3",
+	        "div",
 	        null,
-	        "About Component"
+	        React.createElement(
+	            "h3",
+	            null,
+	            "About Component"
+	        ),
+	        React.createElement(
+	            "p",
+	            null,
+	            "Welcome to about page"
+	        )
 	    );
 	};
 	module.exports = About;
@@ -26723,6 +26732,11 @@
 	            "h3",
 	            null,
 	            "Example component!"
+	        ),
+	        React.createElement(
+	            "p",
+	            null,
+	            "Welcome to example page"
 	        )
 	    );
 	};
