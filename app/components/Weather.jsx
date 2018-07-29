@@ -42,14 +42,14 @@ var Weather = React.createClass({
             if(isLoading) {
                 // check if it is loading first, takes precedence even
                 // if there is temp and location already in state
-                return <h3>Fetching weather...</h3>;
+                return <h3 className="text-center">Fetching weather...</h3>;
             } else if(temp && location) {
                 return <WeatherMessage location={location} temp={temp}/>
             }
         }
         return (
             <div>
-                <h3>Weather Component</h3>
+                <h1 className="text-center">Get Weather</h1>
                 <WeatherForm onSearch={this.handleSearch}/>
                 {renderMessage()}
             </div>

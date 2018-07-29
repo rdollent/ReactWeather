@@ -25112,7 +25112,7 @@
 	                // if there is temp and location already in state
 	                return React.createElement(
 	                    "h3",
-	                    null,
+	                    { className: "text-center" },
 	                    "Fetching weather..."
 	                );
 	            } else if (temp && location) {
@@ -25123,9 +25123,9 @@
 	            "div",
 	            null,
 	            React.createElement(
-	                "h3",
-	                null,
-	                "Weather Component"
+	                "h1",
+	                { className: "text-center" },
+	                "Get Weather"
 	            ),
 	            React.createElement(WeatherForm, { onSearch: this.handleSearch }),
 	            renderMessage()
@@ -25165,7 +25165,7 @@
 	                React.createElement("input", { type: "text", ref: "location", placeholder: "Enter city name" }),
 	                React.createElement(
 	                    "button",
-	                    null,
+	                    { className: "button expanded hollow" },
 	                    "Get Weather"
 	                )
 	            )
@@ -25204,8 +25204,8 @@
 	        "div",
 	        null,
 	        React.createElement(
-	            "p",
-	            null,
+	            "h3",
+	            { className: "text-center" },
 	            "It's ",
 	            temp,
 	            " in ",
