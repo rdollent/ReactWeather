@@ -2,7 +2,7 @@ var axios = require("axios");
 
 
 // http://api.openweathermap.org/data/2.5/weather?q=London&APPID=6b548bc27eb953d1c156738e470bcb8b
-const OPEN_WEATHER_MAP_URL = "http://api.openweathermap.org/data/2.5/weather?APPID=6b548bc27eb953d1c156738e470bcb8b&units=metric";
+const OPEN_WEATHER_MAP_URL = "https://api.openweathermap.org/data/2.5/weather?APPID=6b548bc27eb953d1c156738e470bcb8b&units=metric";
 
 module.exports = {
     getTemp: function(location) {

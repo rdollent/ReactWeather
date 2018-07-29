@@ -25225,7 +25225,7 @@
 	var axios = __webpack_require__(229);
 
 	// http://api.openweathermap.org/data/2.5/weather?q=London&APPID=6b548bc27eb953d1c156738e470bcb8b
-	var OPEN_WEATHER_MAP_URL = "http://api.openweathermap.org/data/2.5/weather?APPID=6b548bc27eb953d1c156738e470bcb8b&units=metric";
+	var OPEN_WEATHER_MAP_URL = "https://api.openweathermap.org/data/2.5/weather?APPID=6b548bc27eb953d1c156738e470bcb8b&units=metric";
 
 	module.exports = {
 	    getTemp: function getTemp(location) {
