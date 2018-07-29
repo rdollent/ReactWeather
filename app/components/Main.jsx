@@ -17,8 +17,12 @@ var Main = (props) => {
     return (
         <div>
             <Nav/>
-            <h2>Main component</h2>
-            {props.children}
+            <div className="row">
+                <div className="columns medium-6 large-4 small-centered">
+                {/* 12-column width. no small width, defaults to 12. small-center scales on every width by default i.e. medium-center*/}
+                    {props.children}
+                </div>
+            </div>           
         </div>
     );
 }
