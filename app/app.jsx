@@ -10,7 +10,7 @@ var About = require("About");
 var Examples = require("Examples");
 
 // app css
-require("style!css!applicationStyles");
+require("style!css!sass!applicationStyles");
 
 // load foundation
 require("style!css!foundation-sites/dist/foundation.min.css");
