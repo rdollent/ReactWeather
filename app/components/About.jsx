@@ -12,7 +12,7 @@ var React = require("react");
 var About = (props) => {
     return (
         <div>
-            <h1 className="text-center">About Component</h1>
+            <h1 className="text-center page-title">About Component</h1>
             <p>My first React web app. I have built this 
             for The Complete React Web App Developer 
             Course for Udemy.

@@ -9,6 +9,9 @@ var Weather = require("Weather");
 var About = require("About");
 var Examples = require("Examples");
 
+// app css
+require("style!css!applicationStyles");
+
 // load foundation
 require("style!css!foundation-sites/dist/foundation.min.css");
 // require does not know how to load css. use css! loader
