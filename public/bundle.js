@@ -24979,7 +24979,24 @@
 
 	    onSearch: function onSearch(e) {
 	        e.preventDefault();
-	        alert("not yet wired u[");
+	        var location = this.refs.search.value;
+	        var encodedLocation = encodeURIComponent(location);
+
+	        if (location.length > 0) {
+	            // clear nav searchbar
+	            this.refs.search.value = "";
+	            // change url address
+	            window.location.hash = "#/?location=" + encodedLocation;
+
+	            // need to connect to WeatherMessage
+	            // please see componentWillReceiveProps in Weather.jsx
+	            // will detect if component receives any props
+	            // reminder: parent can pass on a prop to a child
+	            // i.e. <Nav message={value} />
+	            // reminder componentWillReceivProps will be deprecated in React 17
+	            // please see
+	            // https://reactjs.org/docs/react-component.html
+	        }
 	    },
 
 	    render: function render() {
@@ -25038,7 +25055,7 @@
 	                        React.createElement(
 	                            "li",
 	                            null,
-	                            React.createElement("input", { type: "search", placeholder: "Search weather by city" })
+	                            React.createElement("input", { type: "search", placeholder: "Search weather by city", ref: "search" })
 	                        ),
 	                        React.createElement(
 	                            "li",
@@ -25087,7 +25104,9 @@
 
 	        this.setState({
 	            isLoading: true,
-	            errorMessage: undefined
+	            errorMessage: undefined,
+	            location: undefined,
+	            temp: undefined
 	        });
 
 	        openWeatherMap.getTemp(location).then(function (temp) {
@@ -25109,15 +25128,46 @@
 	        //     temp: 23
 	        // })
 	    },
+	    componentDidMount: function componentDidMount() {
+	        // query string
+	        // props.location here is not the city location, rather a property assigned by the Link element of react-router
+	        var location = this.props.location.query.location;
+	        console.log("Props", this.props);
+
+	        if (location && location.length > 0) {
+	            this.handleSearch(location);
+	            // remove location string in url address
+	            window.location.hash = "#/";
+	        }
+	    },
+	    // will detect if component receives any props
+	    // reminder: parent can pass on a prop to a child
+	    // i.e. <Nav message={value} />
+	    // reminder componentWillReceivProps will be deprecated in React 17
+	    // please see
+	    // https://reactjs.org/docs/react-component.html
+	    componentWillReceiveProps: function componentWillReceiveProps(newProps) {
+	        // query string
+	        // props.location here is not the city location, rather a property assigned by the Link element of react-router
+	        var location = newProps.location.query.location;
+	        console.log("newProps", newProps);
+
+	        if (location && location.length > 0) {
+	            this.handleSearch(location);
+	            // remove location string in url address
+	            window.location.hash = "#/";
+	        }
+	    },
 	    render: function render() {
 	        var _state = this.state,
 	            location = _state.location,
 	            temp = _state.temp,
 	            isLoading = _state.isLoading,
 	            errorMessage = _state.errorMessage;
-
+	        // console.log("State before", this.state);
 
 	        function renderMessage() {
+
 	            if (isLoading) {
 	                // check if it is loading first, takes precedence even
 	                // if there is temp and location already in state
@@ -25127,6 +25177,7 @@
 	                    "Fetching weather..."
 	                );
 	            } else if (temp && location) {
+	                console.log("inside renderMessage", location);
 	                return React.createElement(WeatherMessage, { location: location, temp: temp });
 	            }
 	        }
@@ -25262,7 +25313,7 @@
 	            // throw new Error("Unable to fetch weather for that location");
 	        });
 
-	        console.log(x);
+	        // console.log(x);
 	        return x;
 	    }
 	};

@@ -18,7 +18,24 @@ var {Link, IndexLink} = require("react-router");
 var Nav = React.createClass ({
     onSearch: function(e) {
         e.preventDefault();
-        alert("not yet wired u[");
+        var location = this.refs.search.value;
+        var encodedLocation = encodeURIComponent(location);
+
+        if(location.length > 0) {
+            // clear nav searchbar
+            this.refs.search.value = "";
+            // change url address
+            window.location.hash = "#/?location=" + encodedLocation;
+
+            // need to connect to WeatherMessage
+            // please see componentWillReceiveProps in Weather.jsx
+            // will detect if component receives any props
+            // reminder: parent can pass on a prop to a child
+            // i.e. <Nav message={value} />
+            // reminder componentWillReceivProps will be deprecated in React 17
+            // please see
+            // https://reactjs.org/docs/react-component.html
+        }
     },
 
     render: function() {
@@ -45,7 +62,7 @@ var Nav = React.createClass ({
                     <form onSubmit={this.onSearch}>
                     <ul className="menu">
                         <li>
-                            <input type="search" placeholder="Search weather by city"/>
+                            <input type="search" placeholder="Search weather by city" ref="search"/>
                         </li>
                         <li>
                             <input type="submit" className="button" value="Get Weather" />
