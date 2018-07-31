@@ -107,14 +107,14 @@
 
 	var Main = __webpack_require__(223);
 	var Weather = __webpack_require__(225);
-	var About = __webpack_require__(256);
-	var Examples = __webpack_require__(257);
+	var About = __webpack_require__(257);
+	var Examples = __webpack_require__(258);
 
 	// app css
-	__webpack_require__(258);
+	__webpack_require__(259);
 
 	// load foundation
-	__webpack_require__(262);
+	__webpack_require__(263);
 	// require does not know how to load css. use css! loader
 	$(document).foundation();
 
@@ -25120,7 +25120,7 @@
 	                isLoading: false,
 	                errorMessage: e.message
 	            });
-	            alert(errorMessage);
+	            // alert(that.state.errorMessage);
 	        });
 
 	        // this.setState({
@@ -26873,6 +26873,11 @@
 
 	var React = __webpack_require__(8);
 
+	// needed to resolve Modal error where cant query a new city
+	// after querying nonexistent city or gibberish
+	var ReactDOM = __webpack_require__(165);
+	var ReactDOMServer = __webpack_require__(256);
+
 	var ErrorModal = React.createClass({
 	    displayName: "ErrorModal",
 
@@ -26886,16 +26891,12 @@
 	        message: React.PropTypes.string.isRequred
 	    },
 	    componentDidMount: function componentDidMount() {
-	        // added this to automatically open modal once it is rendered to the DOM
-	        var modal = new Foundation.Reveal($("#error-modal"));
-	        modal.open();
-	    },
-	    render: function render() {
 	        var _props = this.props,
 	            title = _props.title,
 	            message = _props.message;
 
-	        return React.createElement(
+
+	        var modalMarkup = React.createElement(
 	            "div",
 	            { id: "error-modal", className: "reveal tiny text-center", "data-reveal": "" },
 	            React.createElement(
@@ -26918,6 +26919,34 @@
 	                )
 	            )
 	        );
+
+	        // jquery selector
+	        // when you pass in HTML elements into jquery,
+	        // it doesnt select them, it tries to create a
+	        // separate DOM which you can insert anywhere into the file
+	        // why are we doing this?
+	        // Foundation changes the DOM so when
+	        // modal pops up, React tries to re-load since the DOM changed
+
+	        // take JSX code and return string version
+	        // wil let you use string version in methods like
+	        // .html() or innerHTML();
+	        var $modal = $(ReactDOMServer.renderToString(modalMarkup));
+
+	        // find the node where 'this' lives
+	        // use findDOMNODE
+	        // takes an argument i.e. this and returns where the node is
+	        // findDOMNode finds the location of the node 
+	        // jquery selector $ selects the node using its location as its selector
+	        // in the DOM. then replace that node's content using .html()
+	        $(ReactDOM.findDOMNode(this)).html($modal);
+	        // added this to automatically open modal once it is rendered to the DOM
+	        var modal = new Foundation.Reveal($("#error-modal"));
+	        modal.open();
+	    },
+	    render: function render() {
+
+	        return React.createElement("div", null);
 	    }
 	});
 
@@ -26926,6 +26955,15 @@
 
 /***/ },
 /* 256 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	module.exports = __webpack_require__(155);
+
+
+/***/ },
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -26989,7 +27027,7 @@
 	module.exports = About;
 
 /***/ },
-/* 257 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27049,16 +27087,16 @@
 	module.exports = Examples;
 
 /***/ },
-/* 258 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(259);
+	var content = __webpack_require__(260);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(261)(content, {});
+	var update = __webpack_require__(262)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -27075,10 +27113,10 @@
 	}
 
 /***/ },
-/* 259 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(260)();
+	exports = module.exports = __webpack_require__(261)();
 	// imports
 
 
@@ -27089,7 +27127,7 @@
 
 
 /***/ },
-/* 260 */
+/* 261 */
 /***/ function(module, exports) {
 
 	/*
@@ -27145,7 +27183,7 @@
 
 
 /***/ },
-/* 261 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -27399,16 +27437,16 @@
 
 
 /***/ },
-/* 262 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(263);
+	var content = __webpack_require__(264);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(261)(content, {});
+	var update = __webpack_require__(262)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -27425,10 +27463,10 @@
 	}
 
 /***/ },
-/* 263 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(260)();
+	exports = module.exports = __webpack_require__(261)();
 	// imports
 
 
